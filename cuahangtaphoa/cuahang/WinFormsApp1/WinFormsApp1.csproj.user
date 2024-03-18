@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="Boundary\.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\BillDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\Customer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\Homepage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\ImportOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\InvoiceExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\product.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\ProductType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\SaleOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\Supplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Boundary\.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
