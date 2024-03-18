@@ -1,0 +1,217 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th12 01, 2022 lúc 09:57 AM
+-- Phiên bản máy phục vụ: 10.4.25-MariaDB
+-- Phiên bản PHP: 8.1.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Cơ sở dữ liệu: `cuahang`
+--
+CREATE DATABASE IF NOT EXISTS `cuahang` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `cuahang`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `bill`
+--
+
+CREATE TABLE `bill` (
+  `id` varchar(5) NOT NULL,
+  `date` date NOT NULL,
+  `id_cus` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `billdetail`
+--
+
+CREATE TABLE `billdetail` (
+  `id_sp` varchar(5) NOT NULL,
+  `id_bill` varchar(5) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `customer`
+--
+
+CREATE TABLE `customer` (
+  `id` varchar(5) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `sex` varchar(10) NOT NULL,
+  `phone` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `customer`
+--
+
+INSERT INTO `customer` (`id`, `name`, `address`, `email`, `sex`, `phone`) VALUES
+('1', 'pe de', 'Go Vap', 'pedegmail', 'Male', '090'),
+('2', 'Trân', 'tan binh', 'gmail', 'Male', '123'),
+('3', 'Canh', 'Q8', '@mail', 'Female', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `product`
+--
+
+CREATE TABLE `product` (
+  `id` varchar(5) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `saleprice` int(11) NOT NULL,
+  `purchaseprice` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `product`
+--
+
+INSERT INTO `product` (`id`, `name`, `type`, `saleprice`, `purchaseprice`, `status`, `quantity`) VALUES
+('1', 'milkk', '1', 5, 1, '1', 200),
+('2', 'milkk', '1', 5, 1, '1', 200);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `producttype`
+--
+
+CREATE TABLE `producttype` (
+  `id` varchar(5) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `id_sup` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `producttype`
+--
+
+INSERT INTO `producttype` (`id`, `name`, `id_sup`) VALUES
+('1', 'food', '1'),
+('2', 'milk', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `supplier`
+--
+
+CREATE TABLE `supplier` (
+  `id` varchar(5) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `supplier`
+--
+
+INSERT INTO `supplier` (`id`, `name`, `address`, `email`, `phone`) VALUES
+('1', 'tomboy', 'q1', 'tomboy123@gmail.com', '035'),
+('2', 'hoa hau', 'rrrr', 'xinh dep tuyet tran', '1222'),
+('3', 'hello', 'bb', 'b', '11');
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `bill`
+--
+ALTER TABLE `bill`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cus` (`id_cus`);
+
+--
+-- Chỉ mục cho bảng `billdetail`
+--
+ALTER TABLE `billdetail`
+  ADD PRIMARY KEY (`id_sp`,`id_bill`),
+  ADD KEY `p_BD` (`id_bill`);
+
+--
+-- Chỉ mục cho bảng `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `p_t` (`type`);
+
+--
+-- Chỉ mục cho bảng `producttype`
+--
+ALTER TABLE `producttype`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `type_sup` (`id_sup`);
+
+--
+-- Chỉ mục cho bảng `supplier`
+--
+ALTER TABLE `supplier`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `bill`
+--
+ALTER TABLE `bill`
+  ADD CONSTRAINT `cus` FOREIGN KEY (`id_cus`) REFERENCES `customer` (`id`);
+
+--
+-- Các ràng buộc cho bảng `billdetail`
+--
+ALTER TABLE `billdetail`
+  ADD CONSTRAINT `p1_BD` FOREIGN KEY (`id_sp`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `p_BD` FOREIGN KEY (`id_bill`) REFERENCES `bill` (`id`);
+
+--
+-- Các ràng buộc cho bảng `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `p_t` FOREIGN KEY (`type`) REFERENCES `producttype` (`id`);
+
+--
+-- Các ràng buộc cho bảng `producttype`
+--
+ALTER TABLE `producttype`
+  ADD CONSTRAINT `type_sup` FOREIGN KEY (`id_sup`) REFERENCES `supplier` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
